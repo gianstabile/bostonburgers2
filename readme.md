@@ -31,4 +31,4 @@ En esta versión ya se trabaja con DOM sobre una lista de productos definidos. S
 Modifiqué la estética del prototipo de tienda usando Boostrap, y trabajando sobre CSS.
 
 #### Eventos
-Agregué botones con eventos para sumar el artículo al carrito, y para crear un nuevo usuario a partir de un formulario.
+Agregué botones con eventos para sumar el artículo al carrito, y para crear un nuevo usuario a partir de un formulario. Agregué una operación de sumar los productos en vez de duplicarlos al agregarlos al carrito.

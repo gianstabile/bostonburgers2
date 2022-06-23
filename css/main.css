@@ -39,7 +39,8 @@ main {
   flex-direction: column;
   justify-content: space-around;
   padding: 15px;
-  box-shadow: 7px 2px 5px lightgray;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 5px 1px 5px rgba(0, 0, 0, 0.125);
 }
 
 .formulario__datos {
@@ -48,6 +49,7 @@ main {
   flex-direction: column;
   justify-content: space-around;
   margin: 15px;
+  padding-top: 10px;
 }
 
 .formulario__barrios {
@@ -116,21 +118,20 @@ legend {
   font-size: 1.2rem;
 }
 
-.card-body{
+.card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  
 }
 
 .img-fluid {
   width: 100%;
   height: 100px;
-  object-fit:cover;
+  object-fit: cover;
 }
 .card-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: center;
 }
 
@@ -141,8 +142,20 @@ legend {
   border-radius: 5px;
 }
 
+.headProductos {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+}
 
-#carritoHtml{
+.buscador {
+  width: 280px;
+  padding: 15px;
+}
+
+#carritoHtml {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -151,17 +164,25 @@ legend {
 }
 .carrito {
   margin-top: 50px;
+  padding: 50px;
 }
-.botonVaciar{
-float: right;  
-padding: 34px;
+.botonVaciar {
+  float: right;
 }
 
-.footer{
+.total {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 50px;
+}
+
+.footer {
   padding: 20px;
   margin: 10px;
 }
 
-.footer p{
+.footer p {
   text-align: center;
 }

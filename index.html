@@ -59,8 +59,16 @@
       <div class="row mainContainer">
           <main id="items" class="col-sm-8 row">
             <div id="productos" class="contenedor">
-              <h2>Armá tu combo</h2>
-              <p>Elegí los distintos ingredientes de tu burger. Al final verás el costo total.</p>
+              <div class="headProductos">
+                <div class="titleProductos">
+                  <h2>Armá tu combo</h2>
+                  <p>Elegí los distintos ingredientes de tu burger. Al final verás el costo total.</p>
+                </div>
+                <div class="input-group buscador">
+                  <input type="search" class="form-control rounded" placeholder="Escriba acá..." aria-label="Search" aria-describedby="search-addon" />
+                  <button type="button" class="btn btn-outline-primary">Buscar</button>
+                </div>
+              </div>
               <h4>Burgers:</h4>
               <div id="itemsHtml"></div>
 
@@ -200,12 +208,14 @@
               </div>
             </div>
             <!-- Total Carrito -->
-            <div class="col-sm-4 carrito">
+            <div class="col-sm-4 carrito total bg-light">
               <h2>Total Carrito</h2>
               <div id="totalHtml">
 
               </div>
-
+              <div class="botonContinue">
+                <button id="botonContinuar" class="btn btn-success">Continuar</button>
+              </div>
             </div>
           </div>
               

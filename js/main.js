@@ -135,7 +135,7 @@ const articulos = [
   {
     id: 42,
     categoria: "Extras",
-    nombre: "Cebolla morada",
+    nombre: "Cebolla",
     precio: 30,
     img: "./images/cebolla.png",
   },
@@ -144,7 +144,7 @@ const articulos = [
     categoria: "Extras",
     nombre: "Lechuga",
     precio: 10,
-    img: "./images/jamon.png",
+    img: "./images/lechuga.png",
   },
   {
     id: 44,
@@ -216,13 +216,21 @@ console.log(carrito);
 // Funcion para renderizar los items en el carrito
 function renderizarCarrito() {
   carritoHtml.innerText = " ";
-  carrito.forEach((el) => {
+  const sinDuplicados= [...new Set(carrito)];
+  sinDuplicados.forEach((el) => {
+    const itemArticulo= articulos.filter((valor)=>{
+      return valor.id === el;
+    })
+    const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+      return itemId === el ? total += 1 : total;
+        }, 0);
     const divCart = document.createElement("div");
+
     divCart.innerHTML = `
         <div class="card col-sm-4">
         <div class="card-body"> 
         <img class="img-fluid" src="${el.img}">
-        <h5 class="card-title">${el.nombre}</h5>
+        <h5 class="card-title">${el.nombre} x ${numeroUnidadesItem}</h5>
         <p class="card-text">$${el.precio}</p>
         <button id="botonBorrar" class="btn btn-danger eliminarItem" data-id=${el.id}>x</button>
         </div></div>
@@ -231,13 +239,12 @@ function renderizarCarrito() {
   });
 }
 
-//Vaciar item del carrito
 
+//Vaciar item del carrito
 //funcion para borrar un item del carrito
-function borrarItemCarrito(el) {
-  const id = el.target.getAttribute("data-id");
-  carrito = carrito.filter((carritoId) => {
-    return carritoId !== id;
+function borrarItemCarrito(item) {
+  carrito = carrito.filter((valor) => {
+    return valor.id !== item.id;
   });
   renderizarCarrito();
 }
