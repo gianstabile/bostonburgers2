@@ -1,160 +1,3 @@
-const articulos = [
-  {
-    id: 1,
-    categoria: "Burgers",
-    nombre: "Carne",
-    precio: 670,
-    img: "./images/burgercarne.png",
-  },
-  {
-    id: 2,
-    categoria: "Burgers",
-    nombre: "Carne Premium",
-    precio: 840,
-    img: "./images/burgerpremium.png",
-  },
-  {
-    id: 3,
-    categoria: "Burgers",
-    nombre: "Veggie",
-    precio: 700,
-    img: "./images/burgerveggie.png",
-  },
-  {
-    id: 4,
-    categoria: "Burgers",
-    nombre: "Pollo",
-    precio: 750,
-    img: "./images/burgerpollo.png",
-  },
-  {
-    id: 10,
-    categoria: "Panes",
-    nombre: "Pan convencional",
-    precio: 0,
-    img: "./images/burger-bread.png",
-  },
-  {
-    id: 11,
-    categoria: "Panes",
-    nombre: "Pan de campo",
-    precio: 0,
-    img: "./images/burger-bread.png",
-  },
-  {
-    id: 12,
-    categoria: "Panes",
-    nombre: "Pan de salvado",
-    precio: 0,
-    img: "./images/burger-bread2.png",
-  },
-  {
-    id: 13,
-    categoria: "Panes",
-    nombre: "Pan con semillas",
-    precio: 0,
-    img: "./images/burger-bread2.png",
-  },
-  {
-    id: 20,
-    categoria: "Aderezos",
-    nombre: "Mayonesa",
-    precio: 0,
-    img: "./images/mayonesa.png",
-  },
-  {
-    id: 21,
-    categoria: "Aderezos",
-    nombre: "Mostaza",
-    precio: 0,
-    img: "./images/mostaza.png",
-  },
-  {
-    id: 22,
-    categoria: "Aderezos",
-    nombre: "BBQ",
-    precio: 0,
-    img: "./images/ketchup.png",
-  },
-  {
-    id: 23,
-    categoria: "Aderezos",
-    nombre: "Ketchup",
-    precio: 0,
-    img: "./images/ketchup.png",
-  },
-  {
-    id: 30,
-    categoria: "Guarniciones",
-    nombre: "Papas fritas",
-    precio: 200,
-    img: "./images/papasfritas.png",
-  },
-  {
-    id: 31,
-    categoria: "Guarniciones",
-    nombre: "Papas noisette",
-    precio: 250,
-    img: "./images/noisettes.png",
-  },
-  {
-    id: 32,
-    categoria: "Guarniciones",
-    nombre: "Rabas",
-    precio: 450,
-    img: "./images/rabas.png",
-  },
-  {
-    id: 33,
-    categoria: "Guarniciones",
-    nombre: "Papas Boston",
-    precio: 300,
-    img: "./images/papasboston.png",
-  },
-  {
-    id: 34,
-    categoria: "Guarniciones",
-    nombre: "Papas rejilla",
-    precio: 200,
-    img: "./images/papasrejilla.png",
-  },
-  {
-    id: 40,
-    categoria: "Extras",
-    nombre: "Jamón",
-    precio: 50,
-    img: "./images/jamon.png",
-  },
-  {
-    id: 41,
-    categoria: "Extras",
-    nombre: "Queso",
-    precio: 80,
-    img: "./images/queso.png",
-  },
-  {
-    id: 42,
-    categoria: "Extras",
-    nombre: "Cebolla",
-    precio: 30,
-    img: "./images/cebolla.png",
-  },
-  {
-    id: 43,
-    categoria: "Extras",
-    nombre: "Lechuga",
-    precio: 10,
-    img: "./images/lechuga.png",
-  },
-  {
-    id: 44,
-    categoria: "Extras",
-    nombre: "Tomate",
-    precio: 10,
-    img: "./images/tomate.png",
-  },
-];
-
 //Constructor de usuario
 class Usuario {
   constructor(nombre, tel, dir, barrio) {
@@ -203,15 +46,13 @@ function renderizarItems() {
     itemDiv.appendChild(itemBody);
     itemsHtml.appendChild(itemDiv);
     itemButton.addEventListener("click", () => {
+      carritoHtml.innerHTML = ``;
       carrito.push(dato);
       console.log("Agregaste " + dato.nombre + " al carrito.");
-
-      carritoHtml.innerHTML = ``;
       renderizarCarrito();
     });
   });
 }
-console.log(carrito);
 
 // Funcion para renderizar los items en el carrito
 function renderizarCarrito() {
@@ -224,11 +65,11 @@ function renderizarCarrito() {
     const numeroUnidadesItem = carrito.reduce((total, itemId) => {
       return itemId === el ? (total += 1) : total;
     }, 0);
-    const valorTotalporItem = carrito.map((el)=>el.precio).reduce((cantidad, precio)=>{
-      return cantidad + precio;
-    });
-    
-    console.log(valorTotalporItem);
+    const valorTotalporItem = carrito
+      .map((el) => el.precio)
+      .reduce((cantidad, precio) => {
+        return cantidad + precio;
+      });
     const divCart = document.createElement("div");
     divCart.innerHTML = `
         <div class="card col-sm-4">
@@ -243,7 +84,7 @@ function renderizarCarrito() {
   });
   // totalHtml.textContent=calcularTotal();
 }
-
+console.log(carrito);
 
 //Vaciar item del carrito
 //funcion para borrar un item del carrito
@@ -256,7 +97,7 @@ function renderizarCarrito() {
 
 //funcion para calcular el total
 // function calcularTotal() {
-//   return carrito.reduce((total, item) => { 
+//   return carrito.reduce((total, item) => {
 //     const miItem = articulos.filter((el) => {return el.id === parseInt(item)});
 //       return total + miItem.precio;
 //     }, 0);
@@ -274,6 +115,7 @@ botonVaciar.addEventListener("click", vaciarCarrito);
 //inicializar
 renderizarItems();
 renderizarCarrito();
+console.log(carrito)
 
 //Inicializar una lista de usuarios
 const listaUsuarios = [];
