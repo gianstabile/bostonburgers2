@@ -204,7 +204,7 @@ function renderizarItems() {
     itemsHtml.appendChild(itemDiv);
     itemButton.addEventListener("click", () => {
       carrito.push(dato);
-      alert("Agregaste " + dato.nombre + " al carrito.");
+      console.log("Agregaste " + dato.nombre + " al carrito.");
 
       carritoHtml.innerHTML = ``;
       renderizarCarrito();
@@ -216,16 +216,20 @@ console.log(carrito);
 // Funcion para renderizar los items en el carrito
 function renderizarCarrito() {
   carritoHtml.innerText = " ";
-  const sinDuplicados= [...new Set(carrito)];
+  const sinDuplicados = [...new Set(carrito)];
   sinDuplicados.forEach((el) => {
-    const itemArticulo= articulos.filter((valor)=>{
+    const itemArticulo = articulos.filter((valor) => {
       return valor.id === el;
-    })
+    });
     const numeroUnidadesItem = carrito.reduce((total, itemId) => {
-      return itemId === el ? total += 1 : total;
-        }, 0);
+      return itemId === el ? (total += 1) : total;
+    }, 0);
+    const valorTotalporItem = carrito.map((el)=>el.precio).reduce((cantidad, precio)=>{
+      return cantidad + precio;
+    });
+    
+    console.log(valorTotalporItem);
     const divCart = document.createElement("div");
-
     divCart.innerHTML = `
         <div class="card col-sm-4">
         <div class="card-body"> 
@@ -237,28 +241,25 @@ function renderizarCarrito() {
     `;
     carritoHtml.append(divCart);
   });
+  // totalHtml.textContent=calcularTotal();
 }
 
 
 //Vaciar item del carrito
 //funcion para borrar un item del carrito
-function borrarItemCarrito(item) {
-  carrito = carrito.filter((valor) => {
-    return valor.id !== item.id;
-  });
-  renderizarCarrito();
-}
+// function borrarItemCarrito(item) {
+//   carrito = carrito.filter((valor) => {
+//     return valor.id !== item.id;
+//   });
+//   renderizarCarrito();
+// }
 
 //funcion para calcular el total
 // function calcularTotal() {
-//   return carrito
-//     .reduce((total, item) => {
-//       const miItem = articulos.filter((itemarticulos) => {
-//         return itemarticulos.id === parseInt(item);
-//       });
-//       return total + miItem[0].precio;
-//     }, 0)
-//     .toFixed(2);
+//   return carrito.reduce((total, item) => { 
+//     const miItem = articulos.filter((el) => {return el.id === parseInt(item)});
+//       return total + miItem.precio;
+//     }, 0);
 // }
 
 //funcion para vaciar el carrito totalmente
@@ -268,7 +269,7 @@ function vaciarCarrito() {
 }
 
 //eventos
-// botonVaciar.addEventListener("click", vaciarCarrito);
+botonVaciar.addEventListener("click", vaciarCarrito);
 
 //inicializar
 renderizarItems();
