@@ -26,3 +26,9 @@ En esta entrega se muestra por console.log algunos detalles filtrados de los arr
 
 ## Segunda entrega
 En esta versión ya se trabaja con DOM sobre una lista de productos definidos. Se crea un formulario en donde los usuarios registran sus datos para el envío, y pueden ir eligiendo los distintos ingredientes de un listado, y así sumarlo al carrito. Finalmente calcular el costo total del pedido. 
+
+#### Boostrap y CSS
+Modifiqué la estética del prototipo de tienda usando Boostrap, y trabajando sobre CSS.
+
+#### Eventos
+Agregué botones con eventos para sumar el artículo al carrito, y para crear un nuevo usuario a partir de un formulario.
