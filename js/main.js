@@ -116,7 +116,7 @@ const articulos = [
     categoria: "Guarniciones",
     nombre: "Papas rejilla",
     precio: 200,
-    img: "./images/papasfritas.png",
+    img: "./images/papasrejilla.png",
   },
   {
     id: 40,
