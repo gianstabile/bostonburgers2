@@ -170,12 +170,20 @@ legend {
   float: right;
 }
 
+#botonContinuar{
+  margin-top: 25px;
+}
+
 .total {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: stretch;
   align-items: flex-start;
   padding: 50px;
+}
+
+#totalHtml{
+  font-size: 1.5em;
 }
 
 .footer {
@@ -185,4 +193,11 @@ legend {
 
 .footer p {
   text-align: center;
+}
+
+
+.filaProducto{
+  display:flex;
+  flex-direction: column;
+  background-color: aquamarine;
 }

@@ -121,14 +121,14 @@ const articulos = [
   {
     id: 40,
     categoria: "Extras",
-    nombre: "Jamón",
+    nombre: "Jamón cocido",
     precio: 50,
     img: "./images/jamon.png",
   },
   {
     id: 41,
     categoria: "Extras",
-    nombre: "Queso",
+    nombre: "Queso feta",
     precio: 80,
     img: "./images/queso.png",
   },

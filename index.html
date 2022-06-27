@@ -16,7 +16,7 @@
     <!-- Estilos -->
     <link href="./css/main.css" rel="stylesheet" />
     <!-- Favicon -->
-    <link rel="ico" href="./images/logo.ico" />
+    <link rel="icon" href="./images/logo.ico" />
   </head>
   <body>
     <div class="container py-3">
@@ -202,8 +202,10 @@
             <!-- Carrito -->
             <div class="carrito col-sm-8">
               <h2>Carrito</h2>
-              <p>A continuación encontrarás tu combo y el valor total del pedido.</p>
               <div id="carritoHtml" class="list-group"></div>
+                <div id="carritoTable">
+                  
+                </div>
               <div class="botonVaciar">
                 <button id="botonVaciar" class="btn btn-danger">Vaciar</button>
               </div>
@@ -212,7 +214,8 @@
             <div class="col-sm-4 carrito total bg-light">
               <h2>Total Carrito</h2>
               <div id="totalHtml">
-
+                <p>El valor total de tu pedido es:</p>
+                <h3 class="valorTotal"></h3>
               </div>
               <div class="botonContinue">
                 <button id="botonContinuar" class="btn btn-success">Continuar</button>
