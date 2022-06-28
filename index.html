@@ -202,10 +202,24 @@
             <!-- Carrito -->
             <div class="carrito col-sm-8">
               <h2>Carrito</h2>
-              <div id="carritoHtml" class="list-group"></div>
-                <div id="carritoTable">
-                  
-                </div>
+              <div id="carritoHtml"></div>
+              <table class="table">
+                <p id="infoCarrito"></p>
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody id="filaProducto" class="eachItem">
+
+                </tbody>
+              </table>
+              
+              
               <div class="botonVaciar">
                 <button id="botonVaciar" class="btn btn-danger">Vaciar</button>
               </div>

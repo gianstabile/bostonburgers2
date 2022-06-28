@@ -199,5 +199,16 @@ legend {
 .filaProducto{
   display:flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: aquamarine;
+}
+
+.imgTable{
+  width: 40px;
+  height: auto;
+}
+
+.eachItem{
+  height: 100px;
 }

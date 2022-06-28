@@ -13,8 +13,8 @@ class Usuario {
 let carrito = [];
 const itemsHtml = document.getElementById("itemsHtml");
 const carritoHtml = document.querySelector("#carritoHtml");
-const carritoTable = document.querySelector("#carritoTable");
-const filaProducto = document.getElementsByClassName("filaProducto");
+const infoCarrito = document.getElementById("infoCarrito");
+const filaProducto = document.getElementById("filaProducto");
 const totalHtml = document.querySelector("#totalHtml .valorTotal");
 const botonAgregar = document.getElementsByClassName("botonAgregar");
 const botonBorrar = document.getElementsByClassName("botonBorrar");
@@ -87,7 +87,8 @@ function agregarAlCarrito(e) {
 
 // Funcion para renderizar los items en el carrito
 function renderizarCarrito() {
-  carritoTable.innerText = "";
+  infoCarrito.innerText = "";
+  filaProducto.innerText = "";
   if (carrito.length == 0) {
     const clearCart = `<div><p class="cartTable_txt">No hay productos en su carrito. </p></div>`;
     carritoHtml.innerHTML = clearCart;
@@ -95,37 +96,18 @@ function renderizarCarrito() {
     const addCart = `<div><p class"cartTable_txt">Estos son los productos que ha agregado hasta el momento:</p></div>`;
     carritoHtml.innerHTML = addCart;
   }
-  const cartTable = `
-    <div>
-      <table class="table table-striped">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Producto</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Eliminar</th>
-            </tr>
-          </thead>
-          <tbody class="filaProducto">
-          </tbody>
-      </table>
-  </div>`;
-  carritoTable.innerHTML = cartTable;
+
   for (let i = 0; i < carrito.length; i++) {
     const item = carrito[i];
-    const { id, nombre, precio, cantidad } = item;
+    const { id, nombre, img, precio, cantidad } = item;
     const cartItem = `
-    <div>
-      <tr>
+        <td><img class="imgTable" src="${img}"></td>
         <td>${nombre}</td>
         <td>x ${cantidad}</td>
         <td>$${(cantidad * precio).toLocaleString()}</td>
         <td><button id="botonBorrar" class="btn btn-danger eliminarItem" data-id=${id}>x</button></td>
-      </tr>
-    </div>
     `;
     filaProducto.innerHTML += cartItem;
-    carritoTable.innerHTML += filaProducto;
   }
   totalHtml.textContent = "$" + calcularTotal();
 }
