@@ -34,13 +34,11 @@ main {
 }
 
 #formulario {
-  width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  box-shadow: 5px 1px 5px rgba(0, 0, 0, 0.125);
+
 }
 
 .formulario__datos {
@@ -63,7 +61,6 @@ main {
 .inputDatos {
   height: 40px;
   border-radius: 6px;
-  background-color: aliceblue;
   border: none;
   outline: none;
   margin: 10px;
@@ -86,20 +83,9 @@ legend {
   border-radius: 6px;
   border: none;
   outline: none;
-  background-color: aliceblue;
   margin: 20px auto;
 }
 
-#grillaBurgers {
-  padding: 10px;
-  margin: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-  gap: 10px;
-}
 
 #itemsHtml {
   display: flex;
@@ -142,6 +128,10 @@ legend {
   border-radius: 5px;
 }
 
+.btn-danger{
+  margin-left: 20px;
+}
+
 .headProductos {
   display: flex;
   flex-direction: row;
@@ -163,8 +153,8 @@ legend {
   margin: 20px;
 }
 .carrito {
-  margin-top: 50px;
-  padding: 50px;
+  margin-top: 30px;
+  padding: 20px;
 }
 .botonVaciar {
   float: right;
@@ -177,13 +167,8 @@ legend {
 .total {
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
   align-items: flex-start;
-  padding: 50px;
-}
-
-#totalHtml{
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 .footer {

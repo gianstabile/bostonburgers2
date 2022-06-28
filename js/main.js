@@ -17,7 +17,7 @@ const infoCarrito = document.getElementById("infoCarrito");
 const filaProducto = document.getElementById("filaProducto");
 const totalHtml = document.querySelector("#totalHtml .valorTotal");
 const botonAgregar = document.getElementsByClassName("botonAgregar");
-const botonBorrar = document.getElementsByClassName("botonBorrar");
+// let botonEliminar = document.querySelector(".eliminarItem");
 const botonVaciar = document.querySelector("#botonVaciar");
 let botonSiguiente = document.getElementById("formulario");
 
@@ -104,22 +104,12 @@ function renderizarCarrito() {
         <td><img class="imgTable" src="${img}"></td>
         <td>${nombre}</td>
         <td>x ${cantidad}</td>
-        <td>$${(cantidad * precio).toLocaleString()}</td>
-        <td><button id="botonBorrar" class="btn btn-danger eliminarItem" data-id=${id}>x</button></td>
-    `;
+        <td>$${(cantidad * precio).toFixed(2)}</td>
+        <td><button id="eliminarItem" class="btn btn-danger eliminarItem" data-id=${id}>x</button></td>
+        `;
     filaProducto.innerHTML += cartItem;
   }
   totalHtml.textContent = "$" + calcularTotal();
-}
-
-// Funcion para borrar un item del carrito
-// botonBorrar.target.getAttribute('id')
-function borrarItem(e) {
-  // const itemId = e.target.getAttribute(`id`);
-  carrito = carrito.filter((el) => {
-    return el.id !== itemId;
-  });
-  renderizarCarrito();
 }
 
 // Funcion para vaciar el carrito totalmente
@@ -137,9 +127,18 @@ const calcularTotal = () => {
 };
 
 // EVENTOS
-// Botones Vaciar y Borrar carrito
+// Botones Vaciar y Borrar item de carrito
 botonVaciar.addEventListener("click", vaciarCarrito);
-// botonBorrar.addEventListener("click", borrarItem);
+// botonEliminar.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   const btn = e.target.getAttribute("data-id")
+//   console.log(btn)
+//   carrito = carrito.filter((el) => {
+//     return el.id !== idBtn;
+//   });
+//   renderizarCarrito();
+// })
+
 // Boton submit del formulario
 botonSiguiente.addEventListener("submit", (event) => {
   event.preventDefault();

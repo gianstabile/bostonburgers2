@@ -77,165 +77,171 @@
           </main>
           <!-- Registro -->
           <aside class="col-sm-4">
-              <h2>Sus datos</h2>
-              <p>Complete el formulario a continuación para hacer el pedido:</p>
-              <form id="formulario" >
-                <div class="formulario__datos">
-                  <input
-                    id="nombreUsuario"
-                    type="text"
-                    class="inputDatos"
-                    placeholder="Nombre"
-                    name="nombre"
-                    required
-                  />
-                  <input
-                    id="telUsuario"
-                    type="number"
-                    class="inputDatos"
-                    placeholder="Teléfono"
-                    name="telefono"
-                    required
-                  />
-                  <input
-                    id="dirUsuario"
-                    type="text"
-                    class="inputDatos"
-                    placeholder="Dirección"
-                    name="direccion"
-                    required
-                  />
+              <div class="row"> 
+                <form id="formulario" class="col-sm-12 bg-light">
+                  <h2>Sus datos</h2>
+                  <p>Complete el formulario a continuación para hacer el pedido:</p>
+                  <div class="formulario__datos">
+                    <input
+                      id="nombreUsuario"
+                      type="text"
+                      class="inputDatos"
+                      placeholder="Nombre"
+                      name="nombre"
+                      required
+                    />
+                    <input
+                      id="telUsuario"
+                      type="number"
+                      class="inputDatos"
+                      placeholder="Teléfono"
+                      name="telefono"
+                      required
+                    />
+                    <input
+                      id="dirUsuario"
+                      type="text"
+                      class="inputDatos"
+                      placeholder="Dirección"
+                      name="direccion"
+                      required
+                    />
+                  </div>
+                  <div class="formulario__barrios">
+                    <fieldset id="barrios">
+                      <legend>
+                        Seleccione el barrio en el que vive o retiro en local:
+                      </legend>
+                      <div class="barrioOpt">
+                        <input
+                          type="radio"
+                          id="local"
+                          class="inputBarrio"
+                          name="envio"
+                          value="Retiro en local"
+                          checked
+                        />
+                        <label for="local">Retiro en sucursal.</label>
+                      </div>
+                      <div class="barrioOpt">
+                        <input
+                          type="radio"
+                          id="centro"
+                          class="inputBarrio"
+                          name="envio"
+                          value="Barrio Centro"
+                        />
+                        <label for="centro">Barrio Centro</label>
+                      </div>
+                      <div class="barrioOpt">
+                        <input
+                          type="radio"
+                          id="almafuerte"
+                          class="inputBarrio"
+                          name="envio"
+                          value="Barrio Almafuerte"
+                        />
+                        <label for="almafuerte">Barrio Almafuerte</label>
+                      </div>
+                      <div class="barrioOpt">
+                        <input
+                          type="radio"
+                          id="maldonado"
+                          class="inputBarrio"
+                          name="envio"
+                          value="Barrio Maldonado"
+                        />
+                        <label for="maldonado">Barrio Maldonado</label>
+                      </div>
+                      <div class="barrioOpt">
+                        <input
+                          type="radio"
+                          id="bardas"
+                          class="inputBarrio"
+                          name="envio"
+                          value="Barrio Las Bardas"
+                        />
+                        <label for="bardas">Barrio Las Bardas</label>
+                      </div>
+                      <div class="barrioOpt">
+                        <input
+                          type="radio"
+                          id="mercedes"
+                          class="inputBarrio"
+                          name="envio"
+                          value="Barrio Las Mercedes"
+                        />
+                        <label for="mercedes">Barrio Las Mercedes</label>
+                      </div>
+        
+                      <div class="barrioOpt">
+                        <input
+                          type="radio"
+                          id="donbosco"
+                          class="inputBarrio"
+                          name="envio"
+                          value="Barrio Don Bosco"
+                        />
+                        <label for="donbosco">Barrio Don Bosco</label>
+                      </div>
+                      <div class="barrioOpt">
+                        <input
+                          type="radio"
+                          id="villaunion"
+                          class="inputBarrio"
+                          name="envio"
+                          value="Barrio Villa Unión"
+                        />
+                        <label for="villaunion">Barrio Villa Unión</label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <input type="submit" id="botonSiguiente" class="botonSubmit"  value="Siguiente" />
+                </form>  
+              </div> 
+              <div class="row">
+                <!-- Carrito -->
+                <div class="carrito col-sm-12 bg-light">
+                  <h2>Carrito</h2>
+                  <div id="carritoHtml"></div>
+                  <table class="table">
+                    <p id="infoCarrito"></p>
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Eliminar</th>
+                      </tr>
+                    </thead>
+                    <tbody id="filaProducto" class="eachItem">
+    
+                    </tbody>
+                  </table>
+                  
+                  
+                  <div class="botonVaciar">
+                    <button id="botonVaciar" class="btn btn-danger">Vaciar</button>
+                  </div>
                 </div>
-                <div class="formulario__barrios">
-                  <fieldset id="barrios">
-                    <legend>
-                      Seleccione el barrio en el que vive o retiro en local:
-                    </legend>
-                    <div class="barrioOpt">
-                      <input
-                        type="radio"
-                        id="local"
-                        class="inputBarrio"
-                        name="envio"
-                        value="Retiro en local"
-                        checked
-                      />
-                      <label for="local">Retiro en sucursal.</label>
-                    </div>
-                    <div class="barrioOpt">
-                      <input
-                        type="radio"
-                        id="centro"
-                        class="inputBarrio"
-                        name="envio"
-                        value="Barrio Centro"
-                      />
-                      <label for="centro">Barrio Centro</label>
-                    </div>
-                    <div class="barrioOpt">
-                      <input
-                        type="radio"
-                        id="almafuerte"
-                        class="inputBarrio"
-                        name="envio"
-                        value="Barrio Almafuerte"
-                      />
-                      <label for="almafuerte">Barrio Almafuerte</label>
-                    </div>
-                    <div class="barrioOpt">
-                      <input
-                        type="radio"
-                        id="maldonado"
-                        class="inputBarrio"
-                        name="envio"
-                        value="Barrio Maldonado"
-                      />
-                      <label for="maldonado">Barrio Maldonado</label>
-                    </div>
-                    <div class="barrioOpt">
-                      <input
-                        type="radio"
-                        id="bardas"
-                        class="inputBarrio"
-                        name="envio"
-                        value="Barrio Las Bardas"
-                      />
-                      <label for="bardas">Barrio Las Bardas</label>
-                    </div>
-                    <div class="barrioOpt">
-                      <input
-                        type="radio"
-                        id="mercedes"
-                        class="inputBarrio"
-                        name="envio"
-                        value="Barrio Las Mercedes"
-                      />
-                      <label for="mercedes">Barrio Las Mercedes</label>
-                    </div>
-      
-                    <div class="barrioOpt">
-                      <input
-                        type="radio"
-                        id="donbosco"
-                        class="inputBarrio"
-                        name="envio"
-                        value="Barrio Don Bosco"
-                      />
-                      <label for="donbosco">Barrio Don Bosco</label>
-                    </div>
-                    <div class="barrioOpt">
-                      <input
-                        type="radio"
-                        id="villaunion"
-                        class="inputBarrio"
-                        name="envio"
-                        value="Barrio Villa Unión"
-                      />
-                      <label for="villaunion">Barrio Villa Unión</label>
-                    </div>
-                  </fieldset>
+              </div> 
+              <!-- Total Carrito -->
+              <div class="row">
+                <div class="col-sm-12 carrito total bg-light">
+                  <h2>Total Carrito</h2>
+                  <div id="totalHtml">
+                    <p>El valor total de tu pedido es:</p>
+                    <h3 class="valorTotal"></h3>
+                  </div>
+                  <div class="botonContinue">
+                    <button id="botonContinuar" class="btn btn-success">Continuar</button>
+                  </div>
                 </div>
-                <input type="submit" id="botonSiguiente" class="botonSubmit"  value="Siguiente" />
-              </form>   
+              </div>
+              
           </aside>
-          <div class="row">
-            <!-- Carrito -->
-            <div class="carrito col-sm-8">
-              <h2>Carrito</h2>
-              <div id="carritoHtml"></div>
-              <table class="table">
-                <p id="infoCarrito"></p>
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Eliminar</th>
-                  </tr>
-                </thead>
-                <tbody id="filaProducto" class="eachItem">
-
-                </tbody>
-              </table>
-              
-              
-              <div class="botonVaciar">
-                <button id="botonVaciar" class="btn btn-danger">Vaciar</button>
-              </div>
-            </div>
-            <!-- Total Carrito -->
-            <div class="col-sm-4 carrito total bg-light">
-              <h2>Total Carrito</h2>
-              <div id="totalHtml">
-                <p>El valor total de tu pedido es:</p>
-                <h3 class="valorTotal"></h3>
-              </div>
-              <div class="botonContinue">
-                <button id="botonContinuar" class="btn btn-success">Continuar</button>
-              </div>
-            </div>
-          </div>
+          
               
       </div>
       <footer class="footer container py-3 text-muted">
@@ -243,8 +249,7 @@
           Boston Burgers - Todos los derechos reservados.</footer>
         </p>
   </div>
-
-
+<!-- Scripts Js -->
     <script src="./js/productos.js"></script>
     <script src="./js/main.js"></script>
   </body>
