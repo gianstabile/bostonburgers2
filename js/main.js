@@ -17,9 +17,9 @@ const infoCarrito = document.getElementById("infoCarrito");
 const filaProducto = document.getElementById("filaProducto");
 const totalHtml = document.querySelector("#totalHtml .valorTotal");
 const botonAgregar = document.getElementsByClassName("botonAgregar");
-// let botonEliminar = document.querySelector(".eliminarItem");
+const botonEliminar = document.getElementById("eliminarItem");
 const botonVaciar = document.querySelector("#botonVaciar");
-let botonSiguiente = document.getElementById("formulario");
+const botonSiguiente = document.getElementById("formulario");
 
 // JSON
 if (JSON.parse(localStorage.getItem("carrito"))) {
@@ -100,14 +100,44 @@ function renderizarCarrito() {
   for (let i = 0; i < carrito.length; i++) {
     const item = carrito[i];
     const { id, nombre, img, precio, cantidad } = item;
-    const cartItem = `
-        <td><img class="imgTable" src="${img}"></td>
-        <td>${nombre}</td>
-        <td>x ${cantidad}</td>
-        <td>$${(cantidad * precio).toFixed(2)}</td>
-        <td><button id="eliminarItem" class="btn btn-danger eliminarItem" data-id=${id}>x</button></td>
-        `;
-    filaProducto.innerHTML += cartItem;
+    //creo los elementos de la tabla
+    const firstTr = document.createElement("tr");
+    const firstTd = document.createElement("td");
+    const imgTd = document.createElement("img");
+    imgTd.classList.add("eliminarItem");
+    imgTd.setAttribute("src", img);
+    imgTd.classList.add("imgTable");
+    const titleTd = document.createElement("td");
+    titleTd.textContent = nombre;
+    const qTd = document.createElement("td");
+    qTd.textContent = "x " + cantidad;
+    const priceTd = document.createElement("td");
+    priceTd.textContent = (cantidad * precio).toFixed(2);
+    const btnTd = document.createElement("td");
+    const btnDelete = document.createElement("button");
+    btnDelete.classList.add("btn", "btn-danger", "eliminarItem");
+    btnDelete.setAttribute("id", id);
+    btnDelete.textContent = "x";
+    // agrego todo a la tabla
+    firstTd.append(imgTd);
+    btnTd.append(btnDelete);
+    firstTr.append(firstTd, titleTd, qTd, priceTd, btnTd);
+    // evento del boton borrar item
+    btnDelete.addEventListener("click", function (e) {
+      e.preventDefault();
+      const btn = e.target;
+      const idBtn = btn.getAttribute("id");
+      const quitCarrito = carrito.filter((item) => {
+        return item.id != idBtn;
+      });
+      carrito = [...quitCarrito];
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      console.log("Se eliminó " + nombre + " del carrito");
+      console.log(quitCarrito);
+      renderizarCarrito();
+    });
+    // agrego toda la estructura a html
+    filaProducto.append(firstTr);
   }
   totalHtml.textContent = "$" + calcularTotal();
 }
@@ -127,18 +157,8 @@ const calcularTotal = () => {
 };
 
 // EVENTOS
-// Botones Vaciar y Borrar item de carrito
+// Boton Vaciar carrito
 botonVaciar.addEventListener("click", vaciarCarrito);
-// botonEliminar.addEventListener('click', (e) => {
-//   e.preventDefault();
-//   const btn = e.target.getAttribute("data-id")
-//   console.log(btn)
-//   carrito = carrito.filter((el) => {
-//     return el.id !== idBtn;
-//   });
-//   renderizarCarrito();
-// })
-
 // Boton submit del formulario
 botonSiguiente.addEventListener("submit", (event) => {
   event.preventDefault();

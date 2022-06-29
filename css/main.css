@@ -34,6 +34,7 @@ main {
   flex-direction: column;
   justify-content: space-around;
   padding: 30px;
+  border-radius: 0.25rem;
 }
 
 .formulario__datos {
@@ -144,6 +145,7 @@ legend {
 .carrito {
   margin-top: 30px;
   padding: 30px;
+  border-radius: 0.25rem;
 }
 .botonVaciar {
   margin-top: 10px;
