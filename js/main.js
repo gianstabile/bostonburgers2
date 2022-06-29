@@ -19,7 +19,7 @@ const totalHtml = document.querySelector("#totalHtml .valorTotal");
 const botonAgregar = document.getElementsByClassName("botonAgregar");
 const botonEliminar = document.getElementById("eliminarItem");
 const botonVaciar = document.querySelector("#botonVaciar");
-const botonComprar = document.getElementById("botonComprar")
+const botonComprar = document.getElementById("botonComprar");
 const botonSiguiente = document.getElementById("formulario");
 
 // JSON
@@ -133,7 +133,7 @@ function renderizarCarrito() {
       });
       const enCarrito = carrito.find((item) => item.id == idBtn);
       if (enCarrito.cantidad <= 1) {
-        carrito = carrito.filter((item)=> item.id != idBtn);
+        carrito = carrito.filter((item) => item.id != idBtn);
       } else {
         let carritoNew = carrito.filter((item) => item.id != idBtn);
         carrito = [
@@ -168,29 +168,51 @@ const calcularTotal = () => {
 };
 
 // EVENTOS
-// Boton Vaciar carrito
-botonVaciar.addEventListener("click", vaciarCarrito);
-// Boton Comprar pedido
-botonComprar.addEventListener("click", function() {
-  if((listaUsuarios.length == 1) && (carrito.length != 0)) {
-    alert("Felicitaciones! Realizaste tu pedido.")
-  } else {
-    alert("Hubo un error. Debe completar el formulario de usuario para continuar.")
-  }})
 // Boton submit del formulario
 botonSiguiente.addEventListener("submit", (event) => {
   event.preventDefault();
   let nombreUsuario = document.getElementById("nombreUsuario").value;
   let telUsuario = document.getElementById("telUsuario").value;
+  let dirUsuario = document.getElementById("dirUsuario").value;
+  let barrio = document.querySelector('input[name="envio"]:checked').value;
+  let usuario1 = new Usuario(nombreUsuario, telUsuario, dirUsuario, barrio);
   if (telUsuario.length <= 9) {
     alert("Recuerde poner su número de teléfono sin el 0 y el 15.");
     return false;
   }
-  let dirUsuario = document.getElementById("dirUsuario").value;
-  let barrio = document.querySelector('input[name="envio"]:checked').value;
-  let usuario1 = new Usuario(nombreUsuario, telUsuario, dirUsuario, barrio);
-  listaUsuarios.push(usuario1);
+  if (listaUsuarios.length >= 1) {
+    alert(
+      "Espera por favor que termine su compra " + listaUsuarios[0].nombre + "."
+    );
+  } else {
+    listaUsuarios.push(usuario1);
+  }
+  botonSiguiente.reset();
   console.log(listaUsuarios);
+});
+// Boton Vaciar carrito
+botonVaciar.addEventListener("click", vaciarCarrito);
+// Boton Comprar pedido
+botonComprar.addEventListener("click", function () {
+  if (listaUsuarios.length == 1 && carrito.length != 0) {
+    alert(
+      "Felicitaciones " +
+        listaUsuarios[0].nombre +
+        "! Se realizó tu pedido correctamente."
+    );
+    console.log(
+      "Felicitaciones " +
+        listaUsuarios[0].nombre +
+        "! Se realizó tu pedido correctamente."
+    );
+  } else {
+    alert(
+      "Hubo un error. Debe completar el formulario de usuario para continuar."
+    );
+    console.log(
+      "Hubo un error. Debe completar el formulario de usuario para continuar."
+    );
+  }
 });
 
 // INICIALIZAR
