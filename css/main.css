@@ -21,10 +21,6 @@ main {
   padding-right: 10px;
 }
 
-.pricing-header {
-  max-width: 700px;
-}
-
 #registro {
   display: flex;
   flex-direction: column;
@@ -37,12 +33,11 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 15px;
-
+  padding: 30px;
 }
 
 .formulario__datos {
-  height: 140px;
+  height: 130px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -55,7 +50,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 15px;
 }
 
 .inputDatos {
@@ -77,15 +71,10 @@ legend {
   font-size: 1rem;
 }
 
-.botonSubmit {
-  width: 150px;
-  height: 35px;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-  margin: 20px auto;
+.btnContinue {
+  width: 100px;
+  margin-left: auto;
 }
-
 
 #itemsHtml {
   display: flex;
@@ -128,7 +117,7 @@ legend {
   border-radius: 5px;
 }
 
-.btn-danger{
+.btn-danger {
   margin-left: 20px;
 }
 
@@ -154,15 +143,14 @@ legend {
 }
 .carrito {
   margin-top: 30px;
-  padding: 20px;
+  padding: 30px;
 }
 .botonVaciar {
+  margin-top: 10px;
   float: right;
+  width: 100px;
 }
 
-#botonContinuar{
-  margin-top: 25px;
-}
 
 .total {
   display: flex;
@@ -180,20 +168,19 @@ legend {
   text-align: center;
 }
 
-
-.filaProducto{
-  display:flex;
+.filaProducto {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: aquamarine;
 }
 
-.imgTable{
+.imgTable {
   width: 40px;
   height: auto;
 }
 
-.eachItem{
+.eachItem {
   height: 100px;
 }

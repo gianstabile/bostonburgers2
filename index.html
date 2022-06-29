@@ -59,7 +59,7 @@
       </div>
       <div class="row mainContainer">
           <main id="items" class="col-sm-8 row">
-            <div id="productos" class="contenedor">
+            <div>
               <div class="headProductos">
                 <div class="titleProductos">
                   <h2>Armá tu combo</h2>
@@ -196,7 +196,7 @@
                       </div>
                     </fieldset>
                   </div>
-                  <input type="submit" id="botonSiguiente" class="botonSubmit"  value="Siguiente" />
+                  <button type="submit" id="botonSiguiente" class="btn btn-success btnContinue"  value="Siguiente">Continuar</button>
                 </form>  
               </div> 
               <div class="row">
@@ -204,25 +204,27 @@
                 <div class="carrito col-sm-12 bg-light">
                   <h2>Carrito</h2>
                   <div id="carritoHtml"></div>
-                  <table class="table">
-                    <p id="infoCarrito"></p>
-                    <thead class="thead-dark">
-                      <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Eliminar</th>
-                      </tr>
-                    </thead>
-                    <tbody id="filaProducto" class="eachItem">
-    
-                    </tbody>
-                  </table>
+                  <div class="tablaCarrito">
+                    <table class="table">
+                      <p id="infoCarrito"></p>
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col"></th>
+                          <th scope="col">Producto</th>
+                          <th scope="col">Cantidad</th>
+                          <th scope="col">Precio</th>
+                          <th scope="col">Eliminar</th>
+                        </tr>
+                      </thead>
+                      <tbody id="filaProducto" class="eachItem">
+      
+                      </tbody>
+                    </table>
+                  </div>
                   
                   
-                  <div class="botonVaciar">
-                    <button id="botonVaciar" class="btn btn-danger">Vaciar</button>
+                  <div>
+                    <button id="botonVaciar" class="btn btn-danger botonVaciar">Vaciar</button>
                   </div>
                 </div>
               </div> 
@@ -234,9 +236,7 @@
                     <p>El valor total de tu pedido es:</p>
                     <h3 class="valorTotal"></h3>
                   </div>
-                  <div class="botonContinue">
-                    <button id="botonContinuar" class="btn btn-success">Continuar</button>
-                  </div>
+                  <button id="botonContinuar" class="btn btn-success btnContinue">Finalizar</button>
                 </div>
               </div>
               
