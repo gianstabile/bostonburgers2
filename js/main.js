@@ -171,7 +171,12 @@ const calcularTotal = () => {
 // Boton Vaciar carrito
 botonVaciar.addEventListener("click", vaciarCarrito);
 // Boton Comprar pedido
-botonComprar.addEventListener("click", ()=> console.log("Felicitaciones! Realizaste tu pedido."))
+botonComprar.addEventListener("click", function() {
+  if((listaUsuarios.length == 1) && (carrito.length != 0)) {
+    alert("Felicitaciones! Realizaste tu pedido.")
+  } else {
+    alert("Hubo un error. Debe completar el formulario de usuario para continuar.")
+  }})
 // Boton submit del formulario
 botonSiguiente.addEventListener("submit", (event) => {
   event.preventDefault();

@@ -225,4 +225,12 @@ legend {
   .aside_sm{
     padding: 0 10px 0 8px;
   }
+
+  .btnContinue{
+    margin-bottom: 15px;
+  }
+
+  .botonVaciar{
+    margin-bottom: 15px;
+  }
 }
