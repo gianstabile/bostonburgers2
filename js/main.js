@@ -133,7 +133,7 @@ function renderizarCarrito() {
       });
       const enCarrito = carrito.find((item) => item.id == idBtn);
       if (enCarrito.cantidad <= 1) {
-        carrito.pop(enCarrito);
+        carrito = carrito.filter((item)=> item.id != idBtn);
       } else {
         let carritoNew = carrito.filter((item) => item.id != idBtn);
         carrito = [
