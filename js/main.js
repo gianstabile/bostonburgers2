@@ -19,6 +19,7 @@ const totalHtml = document.querySelector("#totalHtml .valorTotal");
 const botonAgregar = document.getElementsByClassName("botonAgregar");
 const botonEliminar = document.getElementById("eliminarItem");
 const botonVaciar = document.querySelector("#botonVaciar");
+const botonComprar = document.getElementById("botonComprar")
 const botonSiguiente = document.getElementById("formulario");
 
 // JSON
@@ -132,7 +133,7 @@ function renderizarCarrito() {
       });
       const enCarrito = carrito.find((item) => item.id == idBtn);
       if (enCarrito.cantidad <= 1) {
-        carrito.shift(enCarrito);
+        carrito.pop(enCarrito);
       } else {
         let carritoNew = carrito.filter((item) => item.id != idBtn);
         carrito = [
@@ -169,6 +170,8 @@ const calcularTotal = () => {
 // EVENTOS
 // Boton Vaciar carrito
 botonVaciar.addEventListener("click", vaciarCarrito);
+// Boton Comprar pedido
+botonComprar.addEventListener("click", ()=> console.log("Felicitaciones! Realizaste tu pedido."))
 // Boton submit del formulario
 botonSiguiente.addEventListener("submit", (event) => {
   event.preventDefault();
