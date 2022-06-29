@@ -130,10 +130,19 @@ function renderizarCarrito() {
       const quitCarrito = carrito.filter((item) => {
         return item.id != idBtn;
       });
-      carrito = [...quitCarrito];
-      localStorage.setItem("carrito", JSON.stringify(carrito));
+      const enCarrito = carrito.find((item) => item.id == idBtn);
+      if (enCarrito.cantidad <= 1) {
+        carrito.shift(enCarrito);
+      } else {
+        let carritoNew = carrito.filter((item) => item.id != idBtn);
+        carrito = [
+          ...carritoNew,
+          { ...enCarrito, cantidad: enCarrito.cantidad - 1 },
+        ];
+      }
       console.log("Se eliminó " + nombre + " del carrito");
-      console.log(quitCarrito);
+      console.log(carrito);
+      localStorage.setItem("carrito", JSON.stringify(carrito));
       renderizarCarrito();
     });
     // agrego toda la estructura a html
@@ -145,6 +154,7 @@ function renderizarCarrito() {
 // Funcion para vaciar el carrito totalmente
 function vaciarCarrito() {
   carrito = [];
+  localStorage.setItem("carrito", JSON.stringify(carrito));
   renderizarCarrito();
   console.log(carrito);
 }
