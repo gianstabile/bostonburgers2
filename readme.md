@@ -32,3 +32,6 @@ Modifiqué la estética del prototipo de tienda usando Boostrap, y trabajando so
 
 #### Eventos
 Agregué botones con eventos para sumar el artículo al carrito, y para crear un nuevo usuario a partir de un formulario. Agregué una operación de sumar los productos en vez de duplicarlos al agregarlos al carrito.
+
+#### Optimizando el código
+Incorporé operadores ternarios para los condicionales IF, y utilicé el operador lógico OR para reducir y limpiar código. Además, incorporé el método clear para el localstorage, cuando se vacía el carrito de compras.
