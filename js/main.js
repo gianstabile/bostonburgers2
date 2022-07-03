@@ -22,13 +22,8 @@ const botonVaciar = document.querySelector("#botonVaciar");
 const botonComprar = document.getElementById("botonComprar");
 const botonSiguiente = document.getElementById("formulario");
 
-// JSON
-if (JSON.parse(localStorage.getItem("carrito"))) {
-  carrito = JSON.parse(localStorage.getItem("carrito"));
-} else {
-  localStorage.setItem("carrito", JSON.stringify([]));
-  carrito = JSON.parse(localStorage.getItem("carrito"));
-}
+// JSON (OPERADOR LÓGICO OR)
+carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 // FUNCIONES
 // Funcion para mostrar articulos en HTML
@@ -63,6 +58,7 @@ function renderizarItems() {
     itemDiv.appendChild(itemBody);
     itemsHtml.appendChild(itemDiv);
   });
+  console.log(carrito)
 }
 
 // Funcion para agregar un item al carrito
@@ -71,6 +67,7 @@ function agregarAlCarrito(e) {
   const idBtn = btn.getAttribute("id");
   const sinDuplicados = articulos.find((prod) => prod.id == idBtn);
   const enCarrito = carrito.find((prod) => prod.id == sinDuplicados.id);
+  // OPERADOR TERNARIO
   if (!enCarrito) {
     carrito.push({ ...sinDuplicados, cantidad: 1 });
   } else {
@@ -155,7 +152,7 @@ function renderizarCarrito() {
 // Funcion para vaciar el carrito totalmente
 function vaciarCarrito() {
   carrito = [];
-  localStorage.setItem("carrito", JSON.stringify(carrito));
+  localStorage.clear();
   renderizarCarrito();
   console.log(carrito);
 }
@@ -180,13 +177,14 @@ botonSiguiente.addEventListener("submit", (event) => {
     alert("Recuerde poner su número de teléfono sin el 0 y el 15.");
     return false;
   }
-  if (listaUsuarios.length >= 1) {
-    alert(
-      "Espera por favor que termine su compra " + listaUsuarios[0].nombre + "."
-    );
-  } else {
-    listaUsuarios.push(usuario1);
-  }
+  // OPERADOR TERNARIO
+  listaUsuarios.length >= 1
+    ? alert(
+        "Espera por favor que termine su compra " +
+          listaUsuarios[0].nombre +
+          "."
+      )
+    : listaUsuarios.push(usuario1);
   botonSiguiente.reset();
   console.log(listaUsuarios);
 });
@@ -194,25 +192,24 @@ botonSiguiente.addEventListener("submit", (event) => {
 botonVaciar.addEventListener("click", vaciarCarrito);
 // Boton Comprar pedido
 botonComprar.addEventListener("click", function () {
-  if (listaUsuarios.length == 1 && carrito.length != 0) {
-    alert(
-      "Felicitaciones " +
-        listaUsuarios[0].nombre +
-        "! Se realizó tu pedido correctamente."
-    );
-    console.log(
-      "Felicitaciones " +
-        listaUsuarios[0].nombre +
-        "! Se realizó tu pedido correctamente."
-    );
-  } else {
-    alert(
-      "Hubo un error. Debe completar el formulario de usuario para continuar."
-    );
-    console.log(
-      "Hubo un error. Debe completar el formulario de usuario para continuar."
-    );
-  }
+  // OPERADOR TERNARIO
+  listaUsuarios.length == 1 && carrito.length != 0
+    ? (alert(
+        "Felicitaciones " +
+          listaUsuarios[0].nombre +
+          "! Se realizó tu pedido correctamente."
+      ),
+      console.log(
+        "Felicitaciones " +
+          listaUsuarios[0].nombre +
+          "! Se realizó tu pedido correctamente."
+      ))
+    : (alert(
+        "Hubo un error. Debe completar el formulario de usuario para continuar."
+      ),
+      console.log(
+        "Hubo un error. Debe completar el formulario de usuario para continuar."
+      ));
 });
 
 // INICIALIZAR
