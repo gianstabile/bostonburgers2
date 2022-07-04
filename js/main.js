@@ -58,7 +58,7 @@ function renderizarItems() {
     itemDiv.appendChild(itemBody);
     itemsHtml.appendChild(itemDiv);
   });
-  console.log(carrito)
+  console.log(carrito);
 }
 
 // Funcion para agregar un item al carrito
@@ -77,6 +77,16 @@ function agregarAlCarrito(e) {
       { ...enCarrito, cantidad: enCarrito.cantidad + 1 },
     ];
   }
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 1200,
+  });
+  Toast.fire({
+    icon: "success",
+    title: "Se añadió el producto.",
+  });
   localStorage.setItem("carrito", JSON.stringify(carrito));
   console.log("Se agregó " + sinDuplicados.nombre + " al carrito.");
   console.log(carrito);
@@ -154,6 +164,13 @@ function vaciarCarrito() {
   carrito = [];
   localStorage.clear();
   renderizarCarrito();
+  Swal.fire({
+    title: "Carrito vacío",
+    icon: "success",
+    text: "Has vaciado todo el carrito de compras.",
+    confirmButtonText: "Aceptar",
+    backdrop: `rgba(0, 0, 0, 0.5)`,
+  });
   console.log(carrito);
 }
 
@@ -173,18 +190,38 @@ botonSiguiente.addEventListener("submit", (event) => {
   let dirUsuario = document.getElementById("dirUsuario").value;
   let barrio = document.querySelector('input[name="envio"]:checked').value;
   let usuario1 = new Usuario(nombreUsuario, telUsuario, dirUsuario, barrio);
+  // OPERADOR AND
   if (telUsuario.length <= 9) {
-    alert("Recuerde poner su número de teléfono sin el 0 y el 15.");
+    Swal.fire({
+      title: "Comprobar datos",
+      icon: "warning",
+      text: "Recuerde poner su número de teléfono sin el 0 y el 15.",
+      confirmButtonText: "Aceptar",
+      backdrop: `rgba(0, 0, 0, 0.5)`,
+    });
     return false;
   }
+
   // OPERADOR TERNARIO
   listaUsuarios.length >= 1
-    ? alert(
-        "Espera por favor que termine su compra " +
+    ? Swal.fire({
+        title: "Espera tu turno",
+        icon: "info",
+        text:
+          "Espera por favor que " +
           listaUsuarios[0].nombre +
-          "."
-      )
-    : listaUsuarios.push(usuario1);
+          " termine su compra.",
+        confirmButtonText: "Aceptar",
+        backdrop: `rgba(0, 0, 0, 0.5)`,
+      })
+    : (listaUsuarios.push(usuario1),
+      Swal.fire({
+        title: "Usuario añadido",
+        icon: "success",
+        text: "Se agregaron tus datos correctamente.",
+        confirmButtonText: "Aceptar",
+        backdrop: `rgba(0, 0, 0, 0.5)`,
+      }));
   botonSiguiente.reset();
   console.log(listaUsuarios);
 });
@@ -194,21 +231,26 @@ botonVaciar.addEventListener("click", vaciarCarrito);
 botonComprar.addEventListener("click", function () {
   // OPERADOR TERNARIO
   listaUsuarios.length == 1 && carrito.length != 0
-    ? (alert(
-        "Felicitaciones " +
-          listaUsuarios[0].nombre +
-          "! Se realizó tu pedido correctamente."
-      ),
+    ? (Swal.fire({
+        title: "Felicitaciones " + listaUsuarios[0].nombre + "!",
+        icon: "success",
+        text: "Se realizó tu pedido correctamente.",
+        backdrop: `rgba(0, 0, 0, 0.5)`,
+      }),
       console.log(
         "Felicitaciones " +
           listaUsuarios[0].nombre +
           "! Se realizó tu pedido correctamente."
       ))
-    : (alert(
-        "Hubo un error. Debe completar el formulario de usuario para continuar."
-      ),
+    : (Swal.fire({
+        title: "Error",
+        icon: "error",
+        text: "Debes completar el formulario o agregar algún producto al carrito para continuar.",
+        confirmButtonText: "Aceptar",
+        backdrop: `rgba(0, 0, 0, 0.5)`,
+      }),
       console.log(
-        "Hubo un error. Debe completar el formulario de usuario para continuar."
+        "Hubo un error. Debes completar el formulario o agregar algún producto al carrito para continuar."
       ));
 });
 

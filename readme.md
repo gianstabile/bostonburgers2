@@ -35,3 +35,6 @@ Agregué botones con eventos para sumar el artículo al carrito, y para crear un
 
 #### Optimizando el código
 Incorporé operadores ternarios para los condicionales IF, y utilicé el operador lógico OR para reducir y limpiar código. Además, incorporé el método clear para el localstorage, cuando se vacía el carrito de compras.
+
+#### Agregando librerías
+Sumé al proyecto la librería Sweet Alert para interactuar con el usuario en los avisos de las acciones que ejecuta sobre la página. Para cada situación sobre el carrito o formulario usé diferentes íconos según el evento, y utilicé la función Toast para avisar cuando se añade un producto nuevo. Además, por consola también se registra cada acción.
