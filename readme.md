@@ -38,3 +38,6 @@ Incorporé operadores ternarios para los condicionales IF, y utilicé el operado
 
 #### Agregando librerías
 Sumé al proyecto la librería Sweet Alert para interactuar con el usuario en los avisos de las acciones que ejecuta sobre la página. Para cada situación sobre el carrito o formulario usé diferentes íconos según el evento, y utilicé la función Toast para avisar cuando se añade un producto nuevo. Además, por consola también se registra cada acción.
+
+#### Buscador o filtro
+Incorporé un buscador por palabras, utilizando el evento AddEventListener sobre un input hecho en bootstrap, que se ubica sobre los productos. Al ingresar las primeras letras ya filtra según los nombres de los productos.

@@ -187,6 +187,10 @@ legend {
   height: 100px;
 }
 
+.filtro{
+  display: none;
+}
+
 @media (max-width: 400px) {
   .logo_centrado{
     display: flex;

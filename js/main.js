@@ -21,6 +21,7 @@ const botonEliminar = document.getElementById("eliminarItem");
 const botonVaciar = document.querySelector("#botonVaciar");
 const botonComprar = document.getElementById("botonComprar");
 const botonSiguiente = document.getElementById("formulario");
+let buscador = document.getElementById("buscador").value;
 
 // JSON (OPERADOR LÓGICO OR)
 carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -252,6 +253,20 @@ botonComprar.addEventListener("click", function () {
       console.log(
         "Hubo un error. Debes completar el formulario o agregar algún producto al carrito para continuar."
       ));
+});
+// Buscador o filtro
+document.addEventListener("keyup", (e) => {
+  if (e.key === "Escape") {
+    e.target.value = "";
+  }
+  if (e.target.matches("#buscador")) {
+    console.log(e.key);
+    document.querySelectorAll(".card").forEach((producto) => {
+      producto.textContent.toLowerCase().includes(e.target.value)
+        ? producto.classList.remove("filtro")
+        : producto.classList.add("filtro");
+    });
+  }
 });
 
 // INICIALIZAR
