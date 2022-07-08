@@ -41,3 +41,6 @@ Sumé al proyecto la librería Sweet Alert para interactuar con el usuario en lo
 
 #### Buscador o filtro
 Incorporé un buscador por palabras, utilizando el evento AddEventListener sobre un input hecho en bootstrap, que se ubica sobre los productos. Al ingresar las primeras letras ya filtra según los nombres de los productos.
+
+#### Método fetch
+Reemplacé el array de productos por un archivo de datos .JSON, simulando que traigo un stock de productos externo. Mediante el Fetch, los incorporo a mi lista de productos.

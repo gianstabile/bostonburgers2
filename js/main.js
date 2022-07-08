@@ -11,7 +11,7 @@ class Usuario {
 // VARIABLES
 // Variables e inicializacion de arrays
 let carrito = [];
-let articulos= []
+let articulos = [];
 const itemsHtml = document.getElementById("itemsHtml");
 const carritoHtml = document.querySelector("#carritoHtml");
 const infoCarrito = document.getElementById("infoCarrito");
@@ -27,14 +27,15 @@ let buscador = document.getElementById("buscador").value;
 // JSON (OPERADOR LÓGICO OR)
 carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-// FETCH
+// FETCH de los productos
 fetch("./js/productos.json")
-.then(data => data.json())
-.then(data => {
-  articulos= data;
-  renderizarItems(articulos)
-})
-
+  .then((data) => data.json())
+  .then((data) => {
+    articulos = data;
+    renderizarItems(articulos);
+    console.log("Artículos en el carrito:");
+    console.log(carrito);
+  });
 
 // FUNCIONES
 // Funcion para mostrar articulos en HTML
@@ -69,7 +70,6 @@ function renderizarItems() {
     itemDiv.appendChild(itemBody);
     itemsHtml.appendChild(itemDiv);
   });
-  console.log(carrito);
 }
 
 // Funcion para agregar un item al carrito
@@ -238,10 +238,13 @@ botonSiguiente.addEventListener("submit", (event) => {
 });
 // Boton Vaciar carrito
 botonVaciar.addEventListener("click", vaciarCarrito);
-// Boton Comprar pedido
+// Boton Comprar pedido - Se agregó una validación para panes y hamburguesas
 botonComprar.addEventListener("click", function () {
   // OPERADOR TERNARIO
-  listaUsuarios.length == 1 && carrito.length != 0
+  listaUsuarios.length == 1 &&
+  carrito.length != 0 &&
+  carrito.some((item) => item.categoria == "Burgers") &&
+  carrito.some((item) => item.categoria == "Panes")
     ? (Swal.fire({
         title: "Felicitaciones " + listaUsuarios[0].nombre + "!",
         icon: "success",
@@ -256,7 +259,7 @@ botonComprar.addEventListener("click", function () {
     : (Swal.fire({
         title: "Error",
         icon: "error",
-        text: "Debes completar el formulario o agregar algún producto al carrito para continuar.",
+        text: "Debes completar el formulario o agregar sí o sí una hamburguesa y algún pan para continuar.",
         confirmButtonText: "Aceptar",
         backdrop: `rgba(0, 0, 0, 0.5)`,
       }),
