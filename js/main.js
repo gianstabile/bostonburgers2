@@ -23,6 +23,7 @@ let carrito = [];
 let usuario = {};
 let pedido = {};
 let articulos = [];
+let listaUsuarios = [];
 const itemsHtml = document.getElementById("itemsHtml");
 const carritoHtml = document.querySelector("#carritoHtml");
 const infoCarrito = document.getElementById("infoCarrito");
@@ -37,6 +38,8 @@ let buscador = document.getElementById("buscador").value;
 
 // LOCALSTORAGE (OPERADOR LÓGICO OR)
 carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+usuario = JSON.parse(sessionStorage.getItem("usuario")) || {};
+console.log(usuario);
 
 // FETCH de los productos
 fetch("./js/productos.json")
@@ -198,7 +201,7 @@ function vaciarCarrito() {
 
 function renderizarPedido() {
   Swal.fire({
-    title: "Felicitaciones " + listaUsuarios[0].nombre + "!",
+    title: "Felicitaciones " + usuario.nombre + "!",
     icon: "success",
     text: "Se realizó tu pedido correctamente. Ahora te redirigiremos a la página de pagos.",
     backdrop: `rgba(0, 0, 0, 0.5)`,
@@ -223,16 +226,35 @@ const calcularTotal = () => {
 // Boton submit del formulario
 botonSiguiente.addEventListener("submit", (event) => {
   event.preventDefault();
-  let nombreUsuario = document.getElementById("nombreUsuario").value;
-  let telUsuario = document.getElementById("telUsuario").value;
-  let dirUsuario = document.getElementById("dirUsuario").value;
+  let nombre = document.getElementById("nombreUsuario").value;
+  let tel = document.getElementById("telUsuario").value;
+  let dir = document.getElementById("dirUsuario").value;
   let barrio = document.querySelector('input[name="envio"]:checked').value;
-  if (sessionStorage.getItem("usuario")) {
+  let usuario = new Usuario(nombre, tel, dir, barrio);
+  // Validar si existe un usuario
+  if (listaUsuarios.length >= 1) {
     usuario = JSON.parse(sessionStorage.getItem("usuario"));
+    console.log(usuario);
+    Swal.fire({
+      title: "Espera tu turno",
+      icon: "info",
+      text: "Espera por favor que " + usuario.nombre + " termine su compra.",
+      confirmButtonText: "Aceptar",
+      backdrop: `rgba(0, 0, 0, 0.5)`,
+    });
   } else {
-    usuario = new Usuario(nombreUsuario, telUsuario, dirUsuario, barrio);
     sessionStorage.setItem("usuario", JSON.stringify(usuario));
+    listaUsuarios.push(usuario);
+    Swal.fire({
+      title: "Usuario añadido",
+      icon: "success",
+      text: "Se agregaron tus datos correctamente.",
+      confirmButtonText: "Aceptar",
+      backdrop: `rgba(0, 0, 0, 0.5)`,
+    });
   }
+  console.log(usuario);
+
   // OPERADOR AND
   if (telUsuario.length <= 9) {
     Swal.fire({
@@ -244,50 +266,28 @@ botonSiguiente.addEventListener("submit", (event) => {
     });
     return false;
   }
-
-  // OPERADOR TERNARIO
-  sessionStorage.getItem("usuario") != undefined && listaUsuarios.length >= 1
-    ? Swal.fire({
-        title: "Espera tu turno",
-        icon: "info",
-        text:
-          "Espera por favor que " +
-          listaUsuarios[0].nombre +
-          " termine su compra.",
-        confirmButtonText: "Aceptar",
-        backdrop: `rgba(0, 0, 0, 0.5)`,
-      })
-    : (listaUsuarios.push(usuario),
-      Swal.fire({
-        title: "Usuario añadido",
-        icon: "success",
-        text: "Se agregaron tus datos correctamente.",
-        confirmButtonText: "Aceptar",
-        backdrop: `rgba(0, 0, 0, 0.5)`,
-      }));
   botonSiguiente.reset();
-  console.log(listaUsuarios);
 });
 // Boton Vaciar carrito
 botonVaciar.addEventListener("click", vaciarCarrito);
 // Boton Comprar pedido - Se agregó una validación para panes y hamburguesas
 botonComprar.addEventListener("click", function () {
   // OPERADOR TERNARIO
-  listaUsuarios.length == 1 &&
+  usuario != undefined &&
   carrito.length != 0 &&
   carrito.some((item) => item.categoria == "Burgers") &&
   carrito.some((item) => item.categoria == "Panes")
     ? (renderizarPedido(),
       console.log(
         "Felicitaciones " +
-          listaUsuarios[0].nombre +
+          usuario.nombre +
           "! Se realizó tu pedido correctamente."
       ),
       // creación de un pedido para el usuario
       (pedido = new Pedido(
-        listaUsuarios[0].nombre,
+        usuario.nombre,
         carrito,
-        listaUsuarios[0].dir,
+        usuario.dir,
         calcularTotal()
       )))
     : (Swal.fire({
@@ -324,5 +324,3 @@ document.addEventListener("keyup", (e) => {
 renderizarItems();
 // Mostrar carrito
 renderizarCarrito();
-// Inicializar lista de usuarios
-const listaUsuarios = [];
