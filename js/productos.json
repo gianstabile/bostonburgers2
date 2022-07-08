@@ -1,0 +1,156 @@
+[
+  {
+    "id": 1,
+    "categoria": "Burgers",
+    "nombre": "Carne",
+    "precio": 670,
+    "img": "./images/burgercarne.png"
+  },
+  {
+    "id": 2,
+    "categoria": "Burgers",
+    "nombre": "Carne Premium",
+    "precio": 840,
+    "img": "./images/burgerpremium.png"
+  },
+  {
+    "id": 3,
+    "categoria": "Burgers",
+    "nombre": "Veggie",
+    "precio": 700,
+    "img": "./images/burgerveggie.png"
+  },
+  {
+    "id": 4,
+    "categoria": "Burgers",
+    "nombre": "Pollo",
+    "precio": 750,
+    "img": "./images/burgerpollo.png"
+  },
+  {
+    "id": 10,
+    "categoria": "Panes",
+    "nombre": "Pan convencional",
+    "precio": 0,
+    "img": "./images/burger-bread.png"
+  },
+  {
+    "id": 11,
+    "categoria": "Panes",
+    "nombre": "Pan de campo",
+    "precio": 0,
+    "img": "./images/burger-bread.png"
+  },
+  {
+    "id": 12,
+    "categoria": "Panes",
+    "nombre": "Pan de salvado",
+    "precio": 0,
+    "img": "./images/burger-bread2.png"
+  },
+  {
+    "id": 13,
+    "categoria": "Panes",
+    "nombre": "Pan con semillas",
+    "precio": 0,
+    "img": "./images/burger-bread2.png"
+  },
+  {
+    "id": 20,
+    "categoria": "Aderezos",
+    "nombre": "Mayonesa",
+    "precio": 0,
+    "img": "./images/mayonesa.png"
+  },
+  {
+    "id": 21,
+    "categoria": "Aderezos",
+    "nombre": "Mostaza",
+    "precio": 0,
+    "img": "./images/mostaza.png"
+  },
+  {
+    "id": 22,
+    "categoria": "Aderezos",
+    "nombre": "BBQ",
+    "precio": 0,
+    "img": "./images/ketchup.png"
+  },
+  {
+    "id": 23,
+    "categoria": "Aderezos",
+    "nombre": "Ketchup",
+    "precio": 0,
+    "img": "./images/ketchup.png"
+  },
+  {
+    "id": 30,
+    "categoria": "Guarniciones",
+    "nombre": "Papas fritas",
+    "precio": 200,
+    "img": "./images/papasfritas.png"
+  },
+  {
+    "id": 31,
+    "categoria": "Guarniciones",
+    "nombre": "Papas noisette",
+    "precio": 250,
+    "img": "./images/noisettes.png"
+  },
+  {
+    "id": 32,
+    "categoria": "Guarniciones",
+    "nombre": "Rabas",
+    "precio": 450,
+    "img": "./images/rabas.png"
+  },
+  {
+    "id": 33,
+    "categoria": "Guarniciones",
+    "nombre": "Papas Boston",
+    "precio": 300,
+    "img": "./images/papasboston.png"
+  },
+  {
+    "id": 34,
+    "categoria": "Guarniciones",
+    "nombre": "Papas rejilla",
+    "precio": 200,
+    "img": "./images/papasrejilla.png"
+  },
+  {
+    "id": 40,
+    "categoria": "Extras",
+    "nombre": "Jamón cocido",
+    "precio": 50,
+    "img": "./images/jamon.png"
+  },
+  {
+    "id": 41,
+    "categoria": "Extras",
+    "nombre": "Queso feta",
+    "precio": 80,
+    "img": "./images/queso.png"
+  },
+  {
+    "id": 42,
+    "categoria": "Extras",
+    "nombre": "Cebolla",
+    "precio": 30,
+    "img": "./images/cebolla.png"
+  },
+  {
+    "id": 43,
+    "categoria": "Extras",
+    "nombre": "Lechuga",
+    "precio": 10,
+    "img": "./images/lechuga.png"
+  },
+  {
+    "id": 44,
+    "categoria": "Extras",
+    "nombre": "Tomate",
+    "precio": 10,
+    "img": "./images/tomate.png"
+  }
+]

@@ -11,6 +11,7 @@ class Usuario {
 // VARIABLES
 // Variables e inicializacion de arrays
 let carrito = [];
+let articulos= []
 const itemsHtml = document.getElementById("itemsHtml");
 const carritoHtml = document.querySelector("#carritoHtml");
 const infoCarrito = document.getElementById("infoCarrito");
@@ -25,6 +26,15 @@ let buscador = document.getElementById("buscador").value;
 
 // JSON (OPERADOR LÓGICO OR)
 carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+// FETCH
+fetch("./js/productos.json")
+.then(data => data.json())
+.then(data => {
+  articulos= data;
+  renderizarItems(articulos)
+})
+
 
 // FUNCIONES
 // Funcion para mostrar articulos en HTML
