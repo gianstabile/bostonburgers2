@@ -1,9 +1,9 @@
 //Constructor de usuario
 class Usuario {
-  constructor(nombre, tel, dir, barrio) {
+  constructor(nombre, tel, direccion, barrio) {
     this.nombre = nombre;
     this.tel = parseInt(tel);
-    this.dir = dir;
+    this.direccion = direccion;
     this.barrio = barrio;
   }
 }
@@ -201,7 +201,7 @@ function vaciarCarrito() {
 
 function renderizarPedido() {
   Swal.fire({
-    title: "Felicitaciones " + usuario.nombre + "!",
+    title: "Felicitaciones " + listaUsuarios[0].nombre + "!",
     icon: "success",
     text: "Se realizó tu pedido correctamente. Ahora te redirigiremos a la página de pagos.",
     backdrop: `rgba(0, 0, 0, 0.5)`,
@@ -280,14 +280,14 @@ botonComprar.addEventListener("click", function () {
     ? (renderizarPedido(),
       console.log(
         "Felicitaciones " +
-          usuario.nombre +
+          listaUsuarios[0].nombre +
           "! Se realizó tu pedido correctamente."
       ),
       // creación de un pedido para el usuario
       (pedido = new Pedido(
-        usuario.nombre,
+        listaUsuarios[0].nombre,
         carrito,
-        usuario.dir,
+        listaUsuarios[0].direccion,
         calcularTotal()
       )))
     : (Swal.fire({
