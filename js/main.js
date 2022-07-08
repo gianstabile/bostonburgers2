@@ -8,10 +8,22 @@ class Usuario {
   }
 }
 
+class Pedido {
+  constructor(usuario, productos, direccion, total) {
+    this.usuario = usuario;
+    this.productos = productos;
+    this.direccion = direccion;
+    this.total = total;
+  }
+}
+
 // VARIABLES
 // Variables e inicializacion de arrays
 let carrito = [];
+let usuario = [];
+let pedido = {};
 let articulos = [];
+const listaUsuarios = [];
 const itemsHtml = document.getElementById("itemsHtml");
 const carritoHtml = document.querySelector("#carritoHtml");
 const infoCarrito = document.getElementById("infoCarrito");
@@ -24,7 +36,7 @@ const botonComprar = document.getElementById("botonComprar");
 const botonSiguiente = document.getElementById("formulario");
 let buscador = document.getElementById("buscador").value;
 
-// JSON (OPERADOR LÓGICO OR)
+// LOCALSTORAGE (OPERADOR LÓGICO OR)
 carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 // FETCH de los productos
@@ -200,7 +212,12 @@ botonSiguiente.addEventListener("submit", (event) => {
   let telUsuario = document.getElementById("telUsuario").value;
   let dirUsuario = document.getElementById("dirUsuario").value;
   let barrio = document.querySelector('input[name="envio"]:checked').value;
-  let usuario1 = new Usuario(nombreUsuario, telUsuario, dirUsuario, barrio);
+  if (sessionStorage.getItem("usuario")) {
+    usuario = JSON.parse(sessionStorage.getItem("usuario"));
+  } else {
+    let usuario = new Usuario(nombreUsuario, telUsuario, dirUsuario, barrio);
+    sessionStorage.setItem("usuario", JSON.stringify(usuario));
+  }
   // OPERADOR AND
   if (telUsuario.length <= 9) {
     Swal.fire({
@@ -214,7 +231,7 @@ botonSiguiente.addEventListener("submit", (event) => {
   }
 
   // OPERADOR TERNARIO
-  listaUsuarios.length >= 1
+  sessionStorage.getItem("usuario") != undefined && listaUsuarios.length >= 1
     ? Swal.fire({
         title: "Espera tu turno",
         icon: "info",
@@ -225,7 +242,7 @@ botonSiguiente.addEventListener("submit", (event) => {
         confirmButtonText: "Aceptar",
         backdrop: `rgba(0, 0, 0, 0.5)`,
       })
-    : (listaUsuarios.push(usuario1),
+    : (listaUsuarios.push(usuario),
       Swal.fire({
         title: "Usuario añadido",
         icon: "success",
@@ -255,7 +272,16 @@ botonComprar.addEventListener("click", function () {
         "Felicitaciones " +
           listaUsuarios[0].nombre +
           "! Se realizó tu pedido correctamente."
-      ))
+      ),
+      // creación de un pedido para el usuario
+      (pedido = new Pedido(
+        listaUsuarios[0].nombre,
+        carrito,
+        listaUsuarios[0].dir,
+        calcularTotal()
+      )),
+      localStorage.clear(),
+      sessionStorage.clear())
     : (Swal.fire({
         title: "Error",
         icon: "error",
@@ -266,6 +292,8 @@ botonComprar.addEventListener("click", function () {
       console.log(
         "Hubo un error. Debes completar el formulario o agregar algún producto al carrito para continuar."
       ));
+
+  console.log(pedido);
 });
 // Buscador o filtro
 document.addEventListener("keyup", (e) => {
@@ -287,8 +315,3 @@ document.addEventListener("keyup", (e) => {
 renderizarItems();
 // Mostrar carrito
 renderizarCarrito();
-
-//Inicializar una lista de usuarios
-const listaUsuarios = [];
-//Inicializar lista de articulos
-const listaProducts = [];
