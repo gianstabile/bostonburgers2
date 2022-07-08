@@ -20,10 +20,9 @@ class Pedido {
 // VARIABLES
 // Variables e inicializacion de arrays
 let carrito = [];
-let usuario = [];
+let usuario = {};
 let pedido = {};
 let articulos = [];
-const listaUsuarios = [];
 const itemsHtml = document.getElementById("itemsHtml");
 const carritoHtml = document.querySelector("#carritoHtml");
 const infoCarrito = document.getElementById("infoCarrito");
@@ -197,6 +196,22 @@ function vaciarCarrito() {
   console.log(carrito);
 }
 
+function renderizarPedido() {
+  Swal.fire({
+    title: "Felicitaciones " + listaUsuarios[0].nombre + "!",
+    icon: "success",
+    text: "Se realizó tu pedido correctamente. Ahora te redirigiremos a la página de pagos.",
+    backdrop: `rgba(0, 0, 0, 0.5)`,
+    timer: 6000,
+    timerProgressBar: true,
+    confirmButtonText: "Aceptar",
+    allowOutsideClick: true,
+    willClose: () => {
+      window.location.href = "https://www.mercadopago.com.ar/";
+    },
+  });
+}
+
 // Funcion para calcular el total del carrito
 const calcularTotal = () => {
   return carrito
@@ -215,7 +230,7 @@ botonSiguiente.addEventListener("submit", (event) => {
   if (sessionStorage.getItem("usuario")) {
     usuario = JSON.parse(sessionStorage.getItem("usuario"));
   } else {
-    let usuario = new Usuario(nombreUsuario, telUsuario, dirUsuario, barrio);
+    usuario = new Usuario(nombreUsuario, telUsuario, dirUsuario, barrio);
     sessionStorage.setItem("usuario", JSON.stringify(usuario));
   }
   // OPERADOR AND
@@ -262,12 +277,7 @@ botonComprar.addEventListener("click", function () {
   carrito.length != 0 &&
   carrito.some((item) => item.categoria == "Burgers") &&
   carrito.some((item) => item.categoria == "Panes")
-    ? (Swal.fire({
-        title: "Felicitaciones " + listaUsuarios[0].nombre + "!",
-        icon: "success",
-        text: "Se realizó tu pedido correctamente.",
-        backdrop: `rgba(0, 0, 0, 0.5)`,
-      }),
+    ? (renderizarPedido(),
       console.log(
         "Felicitaciones " +
           listaUsuarios[0].nombre +
@@ -279,9 +289,7 @@ botonComprar.addEventListener("click", function () {
         carrito,
         listaUsuarios[0].dir,
         calcularTotal()
-      )),
-      localStorage.clear(),
-      sessionStorage.clear())
+      )))
     : (Swal.fire({
         title: "Error",
         icon: "error",
@@ -292,7 +300,8 @@ botonComprar.addEventListener("click", function () {
       console.log(
         "Hubo un error. Debes completar el formulario o agregar algún producto al carrito para continuar."
       ));
-
+  localStorage.clear(), sessionStorage.clear();
+  usuario = {};
   console.log(pedido);
 });
 // Buscador o filtro
@@ -315,3 +324,5 @@ document.addEventListener("keyup", (e) => {
 renderizarItems();
 // Mostrar carrito
 renderizarCarrito();
+// Inicializar lista de usuarios
+const listaUsuarios = [];
