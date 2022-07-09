@@ -39,6 +39,7 @@ let buscador = document.getElementById("buscador").value;
 // LOCALSTORAGE (OPERADOR LÓGICO OR)
 carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 usuario = JSON.parse(sessionStorage.getItem("usuario")) || {};
+// listaUsuarios.push(usuario);
 console.log(usuario);
 
 // FETCH de los productos
@@ -273,7 +274,7 @@ botonVaciar.addEventListener("click", vaciarCarrito);
 // Boton Comprar pedido - Se agregó una validación para panes y hamburguesas
 botonComprar.addEventListener("click", function () {
   // OPERADOR TERNARIO
-  usuario != undefined &&
+  listaUsuarios.length >= 1 &&
   carrito.length != 0 &&
   carrito.some((item) => item.categoria == "Burgers") &&
   carrito.some((item) => item.categoria == "Panes")
@@ -289,7 +290,11 @@ botonComprar.addEventListener("click", function () {
         carrito,
         listaUsuarios[0].direccion,
         calcularTotal()
-      )))
+      )),
+      //borrar localstorage y sessionstorage
+      localStorage.clear(),
+      sessionStorage.clear(),
+      (usuario = {}))
     : (Swal.fire({
         title: "Error",
         icon: "error",
@@ -300,8 +305,6 @@ botonComprar.addEventListener("click", function () {
       console.log(
         "Hubo un error. Debes completar el formulario o agregar algún producto al carrito para continuar."
       ));
-  localStorage.clear(), sessionStorage.clear();
-  usuario = {};
   console.log(pedido);
 });
 // Buscador o filtro
