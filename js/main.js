@@ -1,8 +1,8 @@
 //Constructor de usuario
 class Usuario {
-  constructor(nombre, tel, direccion, barrio) {
+  constructor(nombre, telefono, direccion, barrio) {
     this.nombre = nombre;
-    this.tel = parseInt(tel);
+    this.telefono = parseInt(telefono);
     this.direccion = direccion;
     this.barrio = barrio;
   }
@@ -39,8 +39,6 @@ let buscador = document.getElementById("buscador").value;
 // LOCALSTORAGE (OPERADOR LÓGICO OR)
 carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 usuario = JSON.parse(sessionStorage.getItem("usuario")) || {};
-// listaUsuarios.push(usuario);
-console.log(usuario);
 
 // FETCH de los productos
 fetch("./js/productos.json")
@@ -48,8 +46,6 @@ fetch("./js/productos.json")
   .then((data) => {
     articulos = data;
     renderizarItems(articulos);
-    console.log("Artículos en el carrito:");
-    console.log(carrito);
   });
 
 // FUNCIONES
@@ -114,8 +110,6 @@ function agregarAlCarrito(e) {
     title: "Se añadió el producto.",
   });
   localStorage.setItem("carrito", JSON.stringify(carrito));
-  console.log("Se agregó " + sinDuplicados.nombre + " al carrito.");
-  console.log(carrito);
   renderizarCarrito();
 }
 
@@ -135,16 +129,16 @@ function renderizarCarrito() {
     const item = carrito[i];
     const { id, nombre, img, precio, cantidad } = item;
     //creo los elementos de la tabla
-    const firstTr = document.createElement("tr");
-    const firstTd = document.createElement("td");
+    const newTr = document.createElement("tr");
+    const newTd = document.createElement("td");
     const imgTd = document.createElement("img");
     imgTd.classList.add("eliminarItem");
     imgTd.setAttribute("src", img);
     imgTd.classList.add("imgTable");
     const titleTd = document.createElement("td");
     titleTd.textContent = nombre;
-    const qTd = document.createElement("td");
-    qTd.textContent = "x " + cantidad;
+    const amountTd = document.createElement("td");
+    amountTd.textContent = "x " + cantidad;
     const priceTd = document.createElement("td");
     priceTd.textContent = (cantidad * precio).toFixed(2);
     const btnTd = document.createElement("td");
@@ -153,9 +147,9 @@ function renderizarCarrito() {
     btnDelete.setAttribute("id", id);
     btnDelete.textContent = "x";
     // agrego todo a la tabla
-    firstTd.append(imgTd);
+    newTd.append(imgTd);
     btnTd.append(btnDelete);
-    firstTr.append(firstTd, titleTd, qTd, priceTd, btnTd);
+    newTr.append(newTd, titleTd, amountTd, priceTd, btnTd);
     // evento del boton borrar item
     btnDelete.addEventListener("click", function (e) {
       e.preventDefault();
@@ -174,13 +168,11 @@ function renderizarCarrito() {
           { ...enCarrito, cantidad: enCarrito.cantidad - 1 },
         ];
       }
-      console.log("Se eliminó " + nombre + " del carrito");
-      console.log(carrito);
       localStorage.setItem("carrito", JSON.stringify(carrito));
       renderizarCarrito();
     });
     // agrego toda la estructura a html
-    filaProducto.append(firstTr);
+    filaProducto.append(newTr);
   }
   totalHtml.textContent = "$" + calcularTotal();
 }
@@ -197,7 +189,6 @@ function vaciarCarrito() {
     confirmButtonText: "Aceptar",
     backdrop: `rgba(0, 0, 0, 0.5)`,
   });
-  console.log(carrito);
 }
 
 function renderizarPedido() {
@@ -228,14 +219,13 @@ const calcularTotal = () => {
 botonSiguiente.addEventListener("submit", (event) => {
   event.preventDefault();
   let nombre = document.getElementById("nombreUsuario").value;
-  let tel = document.getElementById("telUsuario").value;
-  let dir = document.getElementById("dirUsuario").value;
+  let telefono = document.getElementById("telefonoUsuario").value;
+  let direccion = document.getElementById("direccionUsuario").value;
   let barrio = document.querySelector('input[name="envio"]:checked').value;
-  let usuario = new Usuario(nombre, tel, dir, barrio);
+  let usuario = new Usuario(nombre, telefono, direccion, barrio);
   // Validar si existe un usuario
   if (listaUsuarios.length >= 1) {
     usuario = JSON.parse(sessionStorage.getItem("usuario"));
-    console.log(usuario);
     Swal.fire({
       title: "Espera tu turno",
       icon: "info",
@@ -254,10 +244,9 @@ botonSiguiente.addEventListener("submit", (event) => {
       backdrop: `rgba(0, 0, 0, 0.5)`,
     });
   }
-  console.log(usuario);
 
   // OPERADOR AND
-  if (telUsuario.length <= 9) {
+  if (telefonoUsuario.length <= 9) {
     Swal.fire({
       title: "Comprobar datos",
       icon: "warning",
@@ -279,11 +268,6 @@ botonComprar.addEventListener("click", function () {
   carrito.some((item) => item.categoria == "Burgers") &&
   carrito.some((item) => item.categoria == "Panes")
     ? (renderizarPedido(),
-      console.log(
-        "Felicitaciones " +
-          listaUsuarios[0].nombre +
-          "! Se realizó tu pedido correctamente."
-      ),
       // creación de un pedido para el usuario
       (pedido = new Pedido(
         listaUsuarios[0].nombre,
@@ -295,17 +279,13 @@ botonComprar.addEventListener("click", function () {
       localStorage.clear(),
       sessionStorage.clear(),
       (usuario = {}))
-    : (Swal.fire({
+    : Swal.fire({
         title: "Error",
         icon: "error",
         text: "Debes completar el formulario o agregar sí o sí una hamburguesa y algún pan para continuar.",
         confirmButtonText: "Aceptar",
         backdrop: `rgba(0, 0, 0, 0.5)`,
-      }),
-      console.log(
-        "Hubo un error. Debes completar el formulario o agregar algún producto al carrito para continuar."
-      ));
-  console.log(pedido);
+      });
 });
 // Buscador o filtro
 document.addEventListener("keyup", (e) => {
@@ -313,12 +293,32 @@ document.addEventListener("keyup", (e) => {
     e.target.value = "";
   }
   if (e.target.matches("#buscador")) {
-    console.log(e.key);
     document.querySelectorAll(".card").forEach((producto) => {
       producto.textContent.toLowerCase().includes(e.target.value)
         ? producto.classList.remove("filtro")
         : producto.classList.add("filtro");
     });
+  }
+});
+// Feedback
+const feedback = document.getElementById("feedback");
+feedback.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const { value: text } = await Swal.fire({
+    input: "textarea",
+    inputLabel: "Feedback del usuario",
+    inputPlaceholder:
+      "Escriba su sugerencia o valoración de nuestro servicio...",
+    inputAttributes: {
+      "aria-label": "Type your message here",
+    },
+    showCancelButton: true,
+    confirmButtonText: "Aceptar",
+    cancelButtonText: "Cancelar",
+  });
+
+  if (text) {
+    Swal.fire("Gracias por su valoración!");
   }
 });
 
